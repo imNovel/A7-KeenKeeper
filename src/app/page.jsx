@@ -1,57 +1,29 @@
+import Banner from "@/components/Banner";
+import Friends from "@/components/ui/Friends";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai";
 
+const friendsPromise = async() =>{
+  const res = await fetch('http://localhost:3000/friends.json')
+  const data = await res.json();
+  return data;
+}
 
-const Home = () => {
-
+const Home = async() => {
+  
+  const friends = await friendsPromise();
 
   return (
     <div className="container mx-auto">
-      <div>
-        <div className="text-center">
-        <h1 className="text-5xl font-bold mt-20">
-          Friends to keep close in your life
-        </h1>
-        <p className="text-lg text-gray-500 my-5">
-          Your personal shelf of meaningful connections. Browse, tend, and
-          nurture the <br /> relationships that matter most.
-        </p>
-        <button className="btn bg-green-900 text-white text-center">
-          <AiOutlinePlus /> Add a Friend
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10">
-        <div className="card card-border bg-base-100 w-96 shadow-sm">
-          <div className="card-body items-center p-8">
-            <h2 className="card-title text-3xl text-green-900">10</h2>
-            <p className="text-xl text-gray-600">Total Friends</p>
-          </div>
-        </div>
-        <div className="card card-border bg-base-100 w-96 shadow-sm">
-          <div className="card-body items-center p-8">
-            <h2 className="card-title text-3xl text-green-900">3</h2>
-            <p className="text-xl text-gray-600">On Track</p>
-          </div>
-        </div>
-        <div className="card card-border bg-base-100 w-96 shadow-sm">
-          <div className="card-body items-center p-8">
-            <h2 className="card-title text-3xl text-green-900">6</h2>
-            <p className="text-xl text-gray-600">Needs Attention</p>
-          </div>
-        </div>
-        <div className="card card-border bg-base-100 w-96 shadow-sm">
-          <div className="card-body items-center p-8">
-            <h2 className="card-title text-3xl text-green-900">12</h2>
-            <p className="text-xl text-gray-600">Interactions This Month</p>
-          </div>
-        </div>
-      </div>
-      </div>
-      <hr className="opacity-10 my-10" />
+      <Banner/>
       <div>
         <h2 className="text-2xl font-semibold mb-4">Your Friends</h2>
-
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {
+            friends.map(friend => <Friends key={friend.id} friend={friend} />)
+          }
+        </div>
       </div>
     </div>
 

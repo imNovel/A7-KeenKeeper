@@ -11,7 +11,7 @@ const Navbar = () => {
     const pathName = usePathname();
 
     const navBtn = <>
-    <button><Link className={pathName === '/' ? 'btn text-white bg-green-900' : 'btn bg-white text-gray-400 border-none'} href="/"> <IoHomeOutline />Home</Link></button>
+    <button><Link className={pathName === '/home' ? 'btn text-white bg-green-900' : 'btn bg-white text-gray-400 border-none'} href="/home"> <IoHomeOutline />Home</Link></button>
     <button><Link className={pathName === '/timeline' ? 'btn text-white bg-green-900' : 'btn bg-white text-gray-400 border-none'} href="/timeline"><IoTimeOutline />Timeline</Link></button>  
     <button><Link className={pathName === '/stats' ? 'btn text-white bg-green-900' : 'btn bg-white text-gray-400 border-none'} href="/stats"><ImStatsDots />Stats</Link></button>
     </>
